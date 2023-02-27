@@ -10,21 +10,18 @@ import '@styles/styles.scss'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import i18n from "@/plugins/i18n"
+import '@/plugins/echo.js'
 
 loadFonts()
 
 
-// Create vue app
+
 const app = createApp(App)
-
-
 // Use plugins
 app.use(i18n)
 app.use(vuetify)
 app.use(createPinia())
 app.use(router)
 app.use(layoutsPlugin)
-
-
 // Mount vue app
 app.mount('#app')

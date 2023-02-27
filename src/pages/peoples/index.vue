@@ -11,116 +11,83 @@
         >
           <VListItem>
             <template #prepend>
-              <VAvatar :image="user.avatar"/>
+              <VAvatar :image="avatar"/>
             </template>
             <VListItemTitle>
               {{ user.name }}
             </VListItemTitle>
             <VListItemSubtitle class="mt-1">
-              <!--              <VBadge-->
-              <!--                dot-->
-              <!--                location="start center"-->
-              <!--                offset-x="2"-->
-              <!--                :color="resolveStatusColor[user.status]"-->
-              <!--                class="me-3"-->
-              <!--              >-->
-              <!--                <span class="ms-4">{{ user.status }}</span>-->
-              <!--              </VBadge>-->
-
-              <span class="text-xs text-disabled">{{ user.lastVisited }}</span>
+              <span class="text-xs text-disabled">{{ user.email }}</span>
             </VListItemSubtitle>
-
             <template #append>
-              <VBtn size="small">
-                Add
-              </VBtn>
+              <div class="col align-self-center d-flex justify-content-end">
+                <VBtn size="small" v-if="!user.status"  @click="addFriend(user.id)">
+                  {{ $t("Add friend") }}
+                </VBtn>
+                <VBtn size="small" v-if="user.status === 'pending'"
+                        @click="removeRequest(user.id)"> {{ $t("Cansel request") }}
+                </VBtn>
+                <VBtn size="small" v-if="user.status === 'friend'"
+                        @click="removeFriend(user.id)"> {{ $t("Remove friend") }}
+                </VBtn>
+              </div>
             </template>
           </VListItem>
           <VDivider v-if="index !== users.length - 1"/>
         </template>
       </VList>
+      <VPagination
+        class="my-4"
+        v-model="paginator.currentPage"
+        :length="paginator.pageCount"
+        :total-visible="5"
+        @update:model-value="usersList"
+      />
     </VCard>
   </div>
 </template>
 
 <script>
-import avatar1 from "@images/avatars/avatar-1.png"
-import avatar2 from "@images/avatars/avatar-2.png"
-import avatar3 from "@images/avatars/avatar-3.png"
-import avatar4 from "@images/avatars/avatar-4.png"
+import avatar from '@images/avatars/avatar-1.png'
 import axios from "@axios"
 import {onBeforeMount, ref, reactive} from "vue"
-
+import {getRandomAvatar} from "@/plugins/helpers";
 
 export default {
   name: "Peoples",
-
   setup() {
+    const users = ref([])
+    const paginator = reactive({
+      currentPage: 1,
+      pageCount: 5,
+    })
 
-    // const users = ref([])
+    const addFriend = id =>
+      axios.get(`friend/${id}/add`).then(responce  => {
+        usersList(paginator.currentPage)
 
-    // const paginator = reactive({
-    //   currentPage: 1,
-    //   pageCount: 0,
-    // })
+      })
 
-    // const addFriend = id =>
-    //   @axios.get(`friend/${id}/add`).then(responce  => {
-    //     usersList(paginator.currentPage)
-    //
-    //   })
-
-
-    // const removeRequest = user =>
-    //   axios.get(`friend/pending/${user}/cansel`).then(() =>
-    //     usersList(paginator.currentPage),
-    //   )
-
-
-    // const removeFriend = user =>
-    //   axios.get(`friend/${user}/delete`).then(() => {
-    //     usersList(paginator.currentPage)
-    //   })
+    const removeRequest = user =>
+      axios.get(`friend/pending/${user}/cansel`).then(() =>
+        usersList(paginator.currentPage),
+      )
+    const removeFriend = user =>
+      axios.get(`friend/${user}/delete`).then(() => {
+        usersList(paginator.currentPage)
+      })
 
     const usersList = (page = 1) => {
       axios.get(`users?page=${page}`).then(responce => {
-        console.log('as')
+        users.value = responce.data.data
+        paginator.pageCount = responce.data.meta.last_page
       })
     }
-
     onBeforeMount(() => {
       usersList()
     })
 
-    const users = ref([
-      {
-        avatar: avatar1,
-        name: 'Caroline Black',
-        status: 'Online',
-        lastVisited: '13 minutes ago',
-      },
-      {
-        avatar: avatar2,
-        name: 'Alfred Copeland',
-        status: 'Away',
-        lastVisited: '11 minutes ago',
-      },
-      {
-        avatar: avatar3,
-        name: 'Celia Schneider',
-        status: 'Offline',
-        lastVisited: '9 minutes ago',
-      },
-      {
-        avatar: avatar4,
-        name: 'Max Rogan',
-        status: 'In Meeting',
-        lastVisited: '28 minutes ago',
-      },
-    ])
-
-
-    return {users}
+    return {users,getRandomAvatar,addFriend,usersList,paginator,removeRequest,removeFriend,avatar }
   },
 }
 </script>

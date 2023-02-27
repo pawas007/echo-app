@@ -5,7 +5,8 @@ import {useRouter} from 'vue-router';
 
 const router = useRouter();
 const auth = useAuthStore()
-const authUser = computed(() => auth.authUser)
+const {authUser} = useAuthStore()
+
 const logout = () => {
   auth.logout().then(() => router.push({name: 'login'}))
 

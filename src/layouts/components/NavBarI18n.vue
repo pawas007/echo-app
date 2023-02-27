@@ -2,6 +2,7 @@
 import NavBarI18n from '@core/components/I18n.vue'
 import { useThemeConfig } from '@core/composable/useThemeConfig'
 
+
 const { isAppRtl } = useThemeConfig()
 
 const i18nCompLanguages = [
