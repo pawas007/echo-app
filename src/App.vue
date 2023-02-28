@@ -9,7 +9,7 @@ const router = useRouter()
 
 useAuthStore().getAuthUser().catch(() => {
   auth.user.value = null
-  auth.isAuth.value = false
+  auth.isAuth = false
   router.push({name: 'login'})
   localStorage.removeItem('token')
 })
