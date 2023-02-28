@@ -31,10 +31,10 @@ const { appRouteTransition } = useThemeConfig()
           {{ themeConfig.app.title }}
         </h1>
       </RouterLink>
+      <NavbarThemeSwitcher class="me-2" />
       <VSpacer />
       <NavBarNotifications />
       <NavBarI18n />
-      <NavbarThemeSwitcher class="me-2" />
       <UserProfile />
     </template>
 
