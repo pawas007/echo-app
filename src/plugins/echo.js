@@ -7,7 +7,7 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'secret',
     wsHost: '127.0.0.1',
-    wsPort: 6001,
+    wsPort: 6002,
     enabledTransports: ['ws'],
     disableStats: true,
     forceTLS: false,

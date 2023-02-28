@@ -6,9 +6,13 @@ import { useThemeConfig } from '@core/composable/useThemeConfig'
 import Footer from '@/layouts/components/Footer.vue'
 import NavbarThemeSwitcher from '@/layouts/components/NavbarThemeSwitcher.vue'
 import UserProfile from '@/layouts/components/UserProfile.vue'
+import NavBarI18n from "@/layouts/components/NavBarI18n.vue"
+import NavBarNotifications from "@/layouts/components/NavBarNotifications.vue"
 
 // @layouts plugin
 import { VerticalNavLayout } from '@layouts'
+
+
 
 const { appRouteTransition, isLessThanOverlayNavBreakpoint } = useThemeConfig()
 const { width: windowWidth } = useWindowSize()
@@ -35,12 +39,11 @@ const { width: windowWidth } = useWindowSize()
             size="24"
           />
         </VBtn>
-
-        <NavbarThemeSwitcher />
-
-        <VSpacer />
-
-        <UserProfile />
+        <VSpacer/>
+        <NavbarThemeSwitcher/>
+        <NavBarNotifications />
+        <NavBarI18n />
+        <UserProfile/>
       </div>
     </template>
 
@@ -50,13 +53,13 @@ const { width: windowWidth } = useWindowSize()
         :name="appRouteTransition"
         mode="out-in"
       >
-        <Component :is="Component" />
+        <Component :is="Component"/>
       </Transition>
     </RouterView>
 
     <!-- 👉 Footer -->
     <template #footer>
-      <Footer />
+      <Footer/>
     </template>
 
     <!-- 👉 Customizer -->

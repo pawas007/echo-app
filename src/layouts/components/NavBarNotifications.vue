@@ -73,7 +73,7 @@ getNotifications()
   <VMenu
     v-model="notifyModal"
     width="580px"
-    location="start"
+    location="bottom"
     offset="14px"
     :close-on-content-click="false">
     <template v-slot:activator="{ props }">
@@ -163,6 +163,7 @@ getNotifications()
 <style lang="scss">
 .notification-section {
   padding: 14px !important;
+
 }
 
 </style>

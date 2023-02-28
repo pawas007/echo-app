@@ -8,7 +8,13 @@ export default [
   {
     title: "nav.Peoples",
     to: { name: 'peoples' },
-
-    // icon: { icon: 'tabler-smart-home' },
+  },
+  {
+    title: "nav.Friends",
+    to: { name: 'friends' },
+  },
+  {
+    title: "nav.Public chat",
+    to: { name: 'chat' },
   },
 ]
