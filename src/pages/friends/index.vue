@@ -46,3 +46,7 @@ const getFriendCounts = () =>
 getFriendCounts()
 
 </script>
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

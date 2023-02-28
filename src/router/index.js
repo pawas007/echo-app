@@ -1,17 +1,24 @@
-import { setupLayouts } from 'virtual:generated-layouts'
-import { createRouter, createWebHistory } from 'vue-router'
+import {setupLayouts} from 'virtual:generated-layouts'
+import {createRouter, createWebHistory} from 'vue-router'
 import routes from '~pages'
 
-
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    ...setupLayouts(routes),
-
-
-  ],
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes: [
+        ...setupLayouts(routes),
+    ],
+})
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem('token');
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!token ) {
+            next({name: 'login'})
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
 })
 
-
-// Docs: https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
 export default router

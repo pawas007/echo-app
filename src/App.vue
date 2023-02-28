@@ -1,9 +1,18 @@
 <script setup>
-import { useTheme } from 'vuetify'
-import { useThemeConfig } from '@core/composable/useThemeConfig'
-import { hexToRgb } from '@layouts/utils'
-import { useAuthStore } from "@/stores/auth"
-useAuthStore().getAuthUser()
+import {useTheme} from 'vuetify'
+import {useThemeConfig} from '@core/composable/useThemeConfig'
+import {hexToRgb} from '@layouts/utils'
+import {useRouter} from 'vue-router';
+import {useAuthStore} from "@/stores/auth"
+const auth = useAuthStore()
+const router = useRouter()
+
+useAuthStore().getAuthUser().catch(() => {
+  auth.user.value = null
+  auth.isAuth.value = false
+  router.push({name: 'login'})
+  localStorage.removeItem('token')
+})
 
 const {
   syncInitialLoaderTheme,
@@ -11,7 +20,7 @@ const {
   isAppRtl,
 } = useThemeConfig()
 
-const { global } = useTheme()
+const {global} = useTheme()
 
 // ℹ️ Sync current theme with initial loader theme
 syncInitialLoaderTheme()
@@ -22,7 +31,7 @@ syncConfigThemeWithVuetifyTheme()
   <VLocaleProvider :rtl="isAppRtl">
     <!-- ℹ️ This is required to set the background color of active nav link based on currently active global theme's primary -->
     <VApp :style="`--v-global-theme-primary: ${hexToRgb(global.current.value.colors.primary)}`">
-      <RouterView />
+      <RouterView/>
     </VApp>
   </VLocaleProvider>
 </template>

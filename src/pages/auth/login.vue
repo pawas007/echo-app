@@ -10,7 +10,7 @@
       <div class="position-relative auth-bg rounded-lg w-100 ma-8 me-0">
         <div class="d-flex align-center justify-center w-100 h-100">
           <VImg
-            max-width="505"
+            max-width="305"
             :src="authThemeImg"
             class="auth-illustration mt-16 mb-2"
           />
@@ -124,9 +124,11 @@ import {
   requiredValidator,
 } from '@validators'
 import authV2LoginIllustrationBorderedDark from '@images/pages/auth-v2-login-illustration-bordered-dark.png'
-import authV2LoginIllustrationBorderedLight from '@images/pages/auth-v2-login-illustration-bordered-light.png'
-import authV2LoginIllustrationDark from '@images/pages/auth-v2-login-illustration-dark.png'
-import authV2LoginIllustrationLight from '@images/pages/auth-v2-login-illustration-light.png'
+import authV2LoginIllustrationBorderedLight from '@images/pages/misc-coming-soon.png'
+
+import authV2LoginIllustrationDark from '@images/pages/auth-v2-reset-password-illustration-dark.png'
+import authV2LoginIllustrationLight from '@images/pages/auth-v2-reset-password-illustration-dark.png'
+
 import authV2MaskDark from '@images/pages/misc-mask-dark.png'
 import authV2MaskLight from '@images/pages/misc-mask-light.png'
 import { useAuthStore } from "@/stores/auth"
@@ -136,7 +138,7 @@ const router = useRouter();
 const authThemeImg = useGenerateImageVariant(authV2LoginIllustrationLight, authV2LoginIllustrationDark, authV2LoginIllustrationBorderedLight, authV2LoginIllustrationBorderedDark, true)
 const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
 const isPasswordVisible = ref(false)
-const email = ref('hheathcote@example.net')
+const email = ref('arnold@example.com')
 const password = ref('password')
 const rememberMe = ref(false)
 const auth = useAuthStore()
