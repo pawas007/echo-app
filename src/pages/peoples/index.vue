@@ -37,6 +37,7 @@
         </template>
       </VList>
       <VPagination
+        v-if="paginator.pageCount > 1"
         class="my-4"
         v-model="paginator.currentPage"
         :length="paginator.pageCount"
