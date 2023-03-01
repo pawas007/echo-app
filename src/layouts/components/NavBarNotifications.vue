@@ -49,8 +49,7 @@ const deleteNotification = id => {
 const subscribeToNotifications = () =>
   getAuthUser().then(user => Echo.private('push_notify.' + user.id)
     .notification((notification) => {
-        console.log(notification)
-        let message = notification.data
+      let message = notification.data
         notificationsList.value.unshift({
           "id": notification.id,
           "user": {"name": message.user.name},

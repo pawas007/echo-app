@@ -51,6 +51,8 @@
                   label="Email"
                   type="email"
                   :rules="[requiredValidator, emailValidator]"
+                  :error=!!errors.email
+                  :messages=errors.email
                 />
               </VCol>
 
@@ -70,12 +72,12 @@
                     v-model="rememberMe"
                     label="Remember me"
                   />
-                  <a
-                    class="text-primary ms-2 mb-1"
-                    href="#"
+                  <RouterLink
+                    class="d-flex align-center justify-center"
+                    :to="{ name: 'forgot-password' }"
                   >
-                    Forgot Password?
-                  </a>
+                    <span>Forgot password?</span>
+                  </RouterLink>
                 </div>
 
                 <VBtn
@@ -92,12 +94,13 @@
                 class="text-center"
               >
                 <span>New on our platform?</span>
-                <a
+
+                <RouterLink
                   class="text-primary ms-2"
-                  href="#"
+                  :to="{ name: 'register' }"
                 >
-                  Create an account
-                </a>
+                  Sign in instead
+                </RouterLink>
               </VCol>
               <VCol
                 cols="12"
@@ -142,11 +145,19 @@ const email = ref('arnold@example.com')
 const password = ref('password')
 const rememberMe = ref(false)
 const auth = useAuthStore()
+
+const errors = ref({
+  email: '',
+})
+
 const login = () => {
   auth.login({
     email: email.value,
     password: password.value,
-  }).then(()=>  router.push({name:'index'}))
+  }).then(()=>  router.push({name:'index'})).catch(e => {
+      errors.value.email = e.response.data.message
+  })
+
 
 }
 </script>
@@ -159,5 +170,6 @@ const login = () => {
 <route lang="yaml">
 meta:
   layout: blank
+  redirectIfLoggedIn: true
 </route>
 

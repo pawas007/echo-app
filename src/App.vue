@@ -7,12 +7,7 @@ import {useAuthStore} from "@/stores/auth"
 const auth = useAuthStore()
 const router = useRouter()
 
-useAuthStore().getAuthUser().catch(() => {
-  auth.user.value = null
-  auth.isAuth = false
-  router.push({name: 'login'})
-  localStorage.removeItem('token')
-})
+useAuthStore().getAuthUser()
 
 const {
   syncInitialLoaderTheme,
