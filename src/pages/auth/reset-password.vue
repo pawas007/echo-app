@@ -38,10 +38,9 @@
             Reset Password 🔒
           </h5>
           <p class="mb-0" v-if="form.email">
-            for <span class="font-weight-bold">{{form.email}}</span>
+            for <span class="font-weight-bold">{{ form.email }}</span>
           </p>
         </VCardText>
-
         <VCardText>
           <VForm @submit.prevent="reset">
             <VRow>
@@ -57,7 +56,6 @@
                   :messages=passwordError
                 />
               </VCol>
-
               <!-- Confirm Password -->
               <VCol cols="12">
                 <VTextField
@@ -68,9 +66,11 @@
                   @click:append-inner="isConfirmPasswordVisible = !isConfirmPasswordVisible"
                 />
               </VCol>
-
+              <p v-if="!!successMessage" class="px-3">
+                {{ successMessage }}
+              </p>
               <!-- Set password -->
-              <VCol cols="12">
+              <VCol cols="12" v-if="!successMessage">
                 <VBtn
                   block
                   type="submit"
@@ -116,19 +116,23 @@ const form = ref({
 })
 
 const passwordError = ref('')
-
+const successMessage = ref('')
 const authThemeImg = useGenerateImageVariant(authV2ResetPasswordIllustrationLight, authV2ResetPasswordIllustrationDark)
 const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
 const isPasswordVisible = ref(false)
 const isConfirmPasswordVisible = ref(false)
 
 const route = useRouter();
-form.value.email = route.currentRoute.value.query.email
+form.value.email = route.currentRoute.value.query.email || null
+form.value.token = route.currentRoute.value.query.token || null
 const reset = () => {
-  axios.post('reset-password', form).then(r => {
-
+  axios.post('reset-password', form.value).then(r => {
+    passwordError.value = ''
+    form.value.password = ''
+    form.value.password_confirmation = ''
+    successMessage.value = 'Password changed'
   }).catch(e => {
-
+    passwordError.value = e.response.data?.errors?.password[0] || e.response.data.message
   })
 }
 
@@ -139,6 +143,6 @@ const reset = () => {
 
 <route lang="yaml">
 meta:
-layout: blank
-redirectIfLoggedIn: true
+  layout: blank
+  redirectIfLoggedIn: true
 </route>

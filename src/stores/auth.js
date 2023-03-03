@@ -12,8 +12,8 @@ export const useAuthStore = defineStore('auth', () => {
         return axios.post('/login', data).then((response) => {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
             localStorage.setItem('token', response.data.token)
+            window.Echo.auth = { headers: { Authorization: "Bearer " + response.data.token }}
             isAuth.value = true
-            getAuthUser()
         })
     }
 
@@ -23,11 +23,12 @@ export const useAuthStore = defineStore('auth', () => {
             user.value = {}
             localStorage.removeItem('token')
             axios.defaults.headers.common['Authorization'] = ''
+
         })
     }
 
-    function getAuthUser() {
-        return  axios.get('/user').then(response => user.value = response.data)
+    async function getAuthUser() {
+        return  await axios.get('/user').then(response => user.value = response.data)
     }
 
     return {user, authUser, login, logout, getAuthUser, isAuth}

@@ -12,17 +12,16 @@ import NavBarNotifications from "@/layouts/components/NavBarNotifications.vue"
 // @layouts plugin
 import { VerticalNavLayout } from '@layouts'
 
-
-
+import '@/plugins/echo.js'
 const { appRouteTransition, isLessThanOverlayNavBreakpoint } = useThemeConfig()
 const { width: windowWidth } = useWindowSize()
+
 </script>
 
 <template>
   <VerticalNavLayout
     :nav-items="navItems"
   >
-    <!-- 👉 navbar -->
     <template #navbar="{ toggleVerticalOverlayNavActive }">
       <div class="d-flex h-100 align-center">
         <VBtn

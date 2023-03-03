@@ -57,7 +57,7 @@
               </VCol>
 
               <p v-if="!!successNotify" class="px-3">
-                {{successNotify}}
+                {{ successNotify }}
               </p>
 
               <!-- Reset link -->
@@ -107,6 +107,8 @@ const successNotify = ref('')
 const sendForm = () => {
   axios.post('forgot-password', {email: email.value}).then(r => {
     successNotify.value = `Reset lind send on ${r.data.email} . Check your email `
+    errorEmail.value = ''
+    email.value = ''
   }).catch(e => {
     console.log(e)
     errorEmail.value = e.response.data.message

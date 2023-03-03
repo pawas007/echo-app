@@ -1,11 +1,14 @@
 <script setup>
+import {watch} from "vue"
 import {useI18n} from "vue-i18n"
 import axios from "@axios"
-import moment from "moment";
-import 'moment/dist/locale/uk';
+import moment from "moment"
+import 'moment/dist/locale/uk'
 import notifySound from '../../assets/audio/new_message_notice.wav'
-import {useAuthStore} from "@/stores/auth";
-const {getAuthUser} = useAuthStore()
+import {useAuthStore} from "@/stores/auth"
+
+const auth = useAuthStore()
+const authUser = computed(() => auth.authUser)
 
 const audio = new Audio(notifySound)
 const momentTransform = date => {
@@ -19,11 +22,31 @@ const notificationsCount = ref(0)
 const notificationsList = ref([]);
 const notifyModal = ref(false)
 
+const subscribeToNotifications = () =>
+  window.Echo.private('push_notify.' + authUser.value.id)
+    .notification((notification) => {
+      let message = notification.data
+        notificationsList.value.unshift({
+          "id": notification.id,
+          "user": {"name": message.user.name},
+          "message": message.message,
+          "created": message.created,
+          "readAt": null
+        })
+        notificationsCount.value++
+        audio.play().catch(error => {
+          audio.play()
+        })
+      }
+    )
+
+
 const getNotifications = () =>
   axios.get('notifications').then(responce => {
     const {notifications, count} = responce.data
     notificationsList.value = notifications
     notificationsCount.value = count
+    subscribeToNotifications()
   })
 
 const markAsRead = id =>
@@ -46,27 +69,9 @@ const deleteNotification = id => {
     notificationsCount.value--
   })
 }
-const subscribeToNotifications = () =>
-  getAuthUser().then(user => Echo.private('push_notify.' + user.id)
-    .notification((notification) => {
-      let message = notification.data
-        notificationsList.value.unshift({
-          "id": notification.id,
-          "user": {"name": message.user.name},
-          "message": message.message,
-          "created": message.created,
-          "readAt": null
 
-        })
-        notificationsCount.value++
-        audio.play().catch(error => {
-          audio.play()
-        })
-      }
-    ))
-
-subscribeToNotifications()
 getNotifications()
+
 </script>
 <template>
   <VMenu
@@ -75,7 +80,9 @@ getNotifications()
     location="bottom"
     offset="14px"
     :close-on-content-click="false">
+    {{ authUser }}
     <template v-slot:activator="{ props }">
+
       <VBtn
         icon
         variant="text"
@@ -154,11 +161,7 @@ getNotifications()
       </template>
     </VList>
   </VMenu>
-
-
 </template>
-
-
 <style lang="scss">
 .notification-section {
   padding: 14px !important;

@@ -120,8 +120,8 @@
 
 <script setup>
 
-import { useGenerateImageVariant } from '@core/composable/useGenerateImageVariant'
-import { themeConfig } from '@themeConfig'
+import {useGenerateImageVariant} from '@core/composable/useGenerateImageVariant'
+import {themeConfig} from '@themeConfig'
 import {
   emailValidator,
   requiredValidator,
@@ -134,8 +134,8 @@ import authV2LoginIllustrationLight from '@images/pages/auth-v2-reset-password-i
 
 import authV2MaskDark from '@images/pages/misc-mask-dark.png'
 import authV2MaskLight from '@images/pages/misc-mask-light.png'
-import { useAuthStore } from "@/stores/auth"
-import { useRouter } from 'vue-router';
+import {useAuthStore} from "@/stores/auth"
+import {useRouter} from 'vue-router';
 
 const router = useRouter();
 const authThemeImg = useGenerateImageVariant(authV2LoginIllustrationLight, authV2LoginIllustrationDark, authV2LoginIllustrationBorderedLight, authV2LoginIllustrationBorderedDark, true)
@@ -154,19 +154,18 @@ const login = () => {
   auth.login({
     email: email.value,
     password: password.value,
-  }).then(()=>  router.push({name:'index'})).catch(e => {
-      errors.value.email = e.response.data.message
+  }).then(() => {
+      window.location.href = '/'
+    }
+  ).catch(e => {
+    errors.value.email = e.response.data.message
   })
-
-
 }
 </script>
 
 <style lang="scss">
 @use "@core/scss/template/pages/page-auth.scss";
 </style>
-
-
 <route lang="yaml">
 meta:
   layout: blank

@@ -3,11 +3,12 @@ import {useTheme} from 'vuetify'
 import {useThemeConfig} from '@core/composable/useThemeConfig'
 import {hexToRgb} from '@layouts/utils'
 import {useRouter} from 'vue-router';
-import {useAuthStore} from "@/stores/auth"
-const auth = useAuthStore()
 const router = useRouter()
+import {useAuthStore} from "@/stores/auth"
 
-useAuthStore().getAuthUser()
+const auth = useAuthStore()
+auth.getAuthUser()
+
 
 const {
   syncInitialLoaderTheme,
