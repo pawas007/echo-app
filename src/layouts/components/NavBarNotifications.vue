@@ -80,9 +80,7 @@ getNotifications()
     location="bottom"
     offset="14px"
     :close-on-content-click="false">
-    {{ authUser }}
     <template v-slot:activator="{ props }">
-
       <VBtn
         icon
         variant="text"

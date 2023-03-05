@@ -31,3 +31,18 @@ syncConfigThemeWithVuetifyTheme()
     </VApp>
   </VLocaleProvider>
 </template>
+
+
+
+
+<!--TODO USER PASSWORD-->
+
+
+<!--TODO CHANGE AVATAR-->
+<!--TODO USER DATA-->
+<!--TODO USER ONLINE-->
+<!--TODO USER NOTIFICATION SETTINGS-->
+<!--//TODO CHANGE ROUTE METHODS-->
+<!--//TODO ADD MAIL NOTIFICATIONS-->
+<!--//TODO ADD queue to notifications email-->
+<!--TODO Router before each-->

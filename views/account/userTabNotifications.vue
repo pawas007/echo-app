@@ -14,13 +14,13 @@
             TYPE
           </th>
           <th scope="col">
-            EMAIL
+            Email
           </th>
           <th scope="col">
-            BROWSER
+            Sound
           </th>
           <th scope="col">
-            APP
+            Push
           </th>
         </tr>
         </thead>

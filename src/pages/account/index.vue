@@ -1,4 +1,5 @@
 <template>
+  <VCard title="Account">
   <VRow v-if="authUser">
     <VCol
       cols="12"
@@ -39,14 +40,13 @@
           <user-tab-notifications :userData="authUser"/>
         </VWindowItem>
         <VWindowItem>
-          <user-chage-password :userData="authUser"/>
-        </VWindowItem>
-        <VWindowItem>
           <user-chage-email :userData="authUser"/>
+          <user-chage-password :userData="authUser"/>
         </VWindowItem>
       </VWindow>
     </VCol>
   </VRow>
+  </VCard>
 </template>
 
 <script setup>
@@ -68,15 +68,9 @@ const tabs = [
   },
   {
     icon: 'tabler-lock',
-    title: 'Change password',
+    title: 'Change password & email',
   },
-  {
-    icon: 'tabler-at',
-    title: 'Change Email',
-  },
-
 ]
-
 
 </script>
 

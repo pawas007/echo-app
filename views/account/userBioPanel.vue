@@ -53,33 +53,31 @@
                 </h6>
               </VListItemTitle>
             </VListItem>
-<!--            <VListItem>-->
-<!--              <VListItemTitle>-->
-<!--                <h6 class="text-base font-weight-semibold">-->
-<!--                  Language:-->
-<!--                  <span class="text-body-2">{{ props.userData.language }}</span>-->
-<!--                </h6>-->
-<!--              </VListItemTitle>-->
-<!--            </VListItem>-->
+            <VListItem>
+              <VListItemTitle>
+                <h6 class="text-base font-weight-semibold">
+                  Language:
+                  <span class="text-body-2">Ukraine</span>
+                </h6>
+              </VListItemTitle>
+            </VListItem>
 
-<!--            <VListItem>-->
-<!--              <VListItemTitle>-->
-<!--                <h6 class="text-base font-weight-semibold">-->
-<!--                  Country:-->
-<!--                  <span class="text-body-2">{{ props.userData.country }}</span>-->
-<!--                </h6>-->
-<!--              </VListItemTitle>-->
-<!--            </VListItem>-->
+            <VListItem>
+              <VListItemTitle>
+                <h6 class="text-base font-weight-semibold">
+                  Country:
+                  <span class="text-body-2">Poland</span>
+                </h6>
+              </VListItemTitle>
+            </VListItem>
           </VList>
         </VCardText>
         <VDivider/>
-        <!-- 👉 Edit and Suspend button -->
         <VCardText class="d-flex justify-center">
           <VBtn
             variant="elevated"
             class="me-3"
-            @click="isUserInfoEditDialogVisible = true"
-          >
+            @click="isUserInfoEditDialogVisible = true">
             Edit
           </VBtn>
         </VCardText>

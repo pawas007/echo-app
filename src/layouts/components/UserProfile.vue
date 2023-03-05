@@ -76,8 +76,7 @@ const logout = () => {
                 size="22"
               />
             </template>
-
-            <VListItemTitle>Profile</VListItemTitle>
+            <VListItemTitle @click="router.push('account')">Profile</VListItemTitle>
           </VListItem>
           <!-- Divider -->
           <VDivider class="my-2"/>
@@ -90,7 +89,6 @@ const logout = () => {
                 size="22"
               />
             </template>
-
             <VListItemTitle>Logout</VListItemTitle>
           </VListItem>
         </VList>

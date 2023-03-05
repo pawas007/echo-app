@@ -79,7 +79,7 @@ export default {
       })
 
     const usersList = (page = 1) => {
-      axios.get(`users?page=${page}`).then(responce => {
+      axios.get(`user?page=${page}`).then(responce => {
         users.value = responce.data.data
         paginator.pageCount = responce.data.meta.last_page
       })
