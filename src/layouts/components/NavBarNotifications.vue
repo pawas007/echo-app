@@ -50,7 +50,7 @@ const getNotifications = () =>
   })
 
 const markAsRead = id =>
-  axios.get(`notifications/${id}/mark/toggle`).then(() =>
+  axios.put(`notifications/${id}/mark/toggle`).then(() =>
     notificationsList.value.map(obj => {
       if (obj.id === id) {
         if (obj.readAt) {
@@ -63,7 +63,7 @@ const markAsRead = id =>
     })
   )
 const deleteNotification = id => {
-  axios.get(`notifications/${id}/destroy`).then(() => {
+  axios.delete(`notifications/${id}/destroy`).then(() => {
     const findNotify = notificationsList.value.findIndex((obj) => obj.id === id);
     notificationsList.value.splice(findNotify, 1);
     notificationsCount.value--

@@ -8,7 +8,15 @@
         >
           <VListItem>
             <template #prepend>
-              <VAvatar :image="avatar"/>
+              <VAvatar color="primary"
+                       variant="tonal">
+                <VImg v-if="user.profile.avatar" :src="user.profile.avatar"/>
+                <span
+                  v-else
+                  class="text-1xl font-weight-semibold">
+              {{ avatarText(user.name) }}
+               </span>
+              </VAvatar>
             </template>
             <VListItemTitle>
               {{ user.name }}
@@ -44,10 +52,10 @@
   </div>
 </template>
 <script>
-import avatar from '@images/avatars/avatar-1.png'
+
 import axios from "@axios";
 import {onBeforeMount, reactive, ref} from "vue";
-
+import {avatarText} from "@core/utils/formatters";
 export default {
   setup() {
     const pendingFriendRequests = ref([])
@@ -56,7 +64,7 @@ export default {
       pageCount: 0,
     })
     const removeRequest = user =>
-      axios.get(`friend/pending/${user}/cansel`).then(() =>
+      axios.delete(`friend/pending/${user}/cansel`).then(() =>
         pendingList(paginator.currentPage)
       )
     const pendingList = async (page = 1) =>
@@ -67,7 +75,7 @@ export default {
     onBeforeMount(() => {
       pendingList()
     })
-    return {pendingFriendRequests, removeRequest, paginator, pendingList, avatar}
+    return {pendingFriendRequests, removeRequest, paginator, pendingList, avatarText}
   },
 }
 </script>

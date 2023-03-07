@@ -1,14 +1,21 @@
 <template>
   <div>
-    <VCard title="Friens">
+    <VCard title="Friends">
       <VList border lines="two" v-if="friends.length">
         <template
           v-for="(user, index) of friends"
-          :key="user.name"
-        >
+          :key="user.name">
           <VListItem>
             <template #prepend>
-              <VAvatar :image="avatar"/>
+              <VAvatar color="primary"
+                       variant="tonal">
+                <VImg v-if="user.profile.avatar" :src="user.profile.avatar"/>
+                <span
+                  v-else
+                  class="text-1xl font-weight-semibold">
+              {{ avatarText(user.name) }}
+               </span>
+              </VAvatar>
             </template>
             <VListItemTitle>
               {{ user.name }}
@@ -38,13 +45,12 @@
         :total-visible="5"
         @update:model-value="friendslist"
       />
-
     </VCard>
   </div>
 </template>
 
 <script>
-import avatar from '@images/avatars/avatar-1.png'
+import {avatarText} from "@core/utils/formatters";
 import axios from "@axios";
 import {onBeforeMount, reactive, ref} from "vue";
 export default {
@@ -56,7 +62,7 @@ export default {
       pageCount: 0,
     })
     const removeFriend = user =>
-      axios.get(`friend/${user}/delete`).then(() => {
+      axios.delete(`friend/${user}/delete`).then(() => {
         friendslist(paginator.currentPage)
       })
     const friendslist = async (page = 1) =>
@@ -67,7 +73,7 @@ export default {
     onBeforeMount(() => {
       friendslist()
     })
-    return {friendslist, removeFriend, friends, paginator,avatar}
+    return {friendslist, removeFriend, friends, paginator,avatarText}
   },
 }
 </script>

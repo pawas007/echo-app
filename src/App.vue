@@ -34,11 +34,11 @@ syncConfigThemeWithVuetifyTheme()
 </template>
 
 
-<!--TODO CHANGE AVATAR-->
-<!--TODO USER NOTIFICATION SETTINGS-->
-<!--TODO CHANGE ROUTE METHODS-->
+
+<!--TODO USER NOTIFICATION SETTINGS with queue email-->
 <!--TODO USER ONLINE-->
-<!--TODO ADD MAIL NOTIFICATIONS-->
-<!--TODO Router before each-->
 <!--TODO sms verify-->
 <!--TODO email verify-->
+
+<!--TODO users Avatars-->
+

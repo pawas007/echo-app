@@ -2,15 +2,16 @@
   <VRow>
     <VCol cols="12">
       <VCard v-if="authUser">
-        <VCardText class="text-center pt-15">
+        <VCardText class="text-center pt-15 d-flex flex-column align-center">
           <VAvatar
             rounded
             :size="120"
             color="primary"
             variant="tonal">
             <VImg
-              v-if="avatar"
-              :src="avatar"
+              ref="userUploadAvatar"
+              v-if="auth.user.profile.avatar"
+              :src="auth.user.profile.avatar"
             />
             <span
               v-else
@@ -19,9 +20,14 @@
               {{ avatarText(auth.user.name) }}
             </span>
           </VAvatar>
+          <VIcon
+            class="mt-1 "
+            icon="tabler-camera"
+            size="24"
+            @click="isUserAvatarEditDialogVisible = true"
+          />
 
-          <!-- 👉 User fullName -->
-          <h6 class="text-h6 mt-4">
+          <h6 class="text-h6 ">
             {{ auth.user.name }}
           </h6>
         </VCardText>
@@ -82,24 +88,32 @@
           <VBtn
             variant="elevated"
             class="me-3"
-            @click="isUserInfoEditDialogVisible = true">
+            @click="isUserProfileEditDialogVisible = true">
             Edit
           </VBtn>
         </VCardText>
       </VCard>
     </VCol>
-   <user-update-profile :is-dialog-open="isUserInfoEditDialogVisible" @close-dialog="isUserInfoEditDialogVisible = false"/>
+    <user-update-profile :is-profile-dialog-open="isUserProfileEditDialogVisible"
+                         @close-profile-dialog="isUserProfileEditDialogVisible = false"/>
+    <user-update-avatar :is-avatar-dialog-open="isUserAvatarEditDialogVisible"
+                        @close-avatar-dialog="isUserAvatarEditDialogVisible = false"/>
+
+
   </VRow>
 </template>
 <script setup>
-import {avatarText,} from '@core/utils/formatters'
-import avatar from '@images/avatars/avatar-1.png'
+import {avatarText} from '@core/utils/formatters'
 import {useAuthStore} from "@/stores/auth";
 import UserUpdateProfile from "./userUpdateProfile.vue";
+import UserUpdateAvatar from "./userUpdateAvatar.vue";
 
-const isUserInfoEditDialogVisible = ref(false)
+const isUserAvatarEditDialogVisible = ref(false)
+const isUserProfileEditDialogVisible = ref(false)
 const auth = useAuthStore()
 const authUser = computed(() => auth.authUser)
+
+
 </script>
 <style lang="scss" scoped>
 .card-list {

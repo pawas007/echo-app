@@ -7,15 +7,19 @@
     offset-y="3"
     bordered
     color="success"
+    v-if="authUser"
   >
     <VAvatar
       class="cursor-pointer"
       color="primary"
       variant="tonal"
     >
-      <VImg :src="avatar1"/>
-
-      <!-- SECTION Menu -->
+      <VImg v-if="authUser.profile.avatar" :src="authUser.profile.avatar"/>
+      <span
+        v-else
+        class="text-1xl font-weight-semibold">
+              {{ avatarText(authUser.name) }}
+            </span>
       <VMenu
         activator="parent"
         width="230"
@@ -34,11 +38,14 @@
                   offset-y="3"
                   color="success"
                 >
-                  <VAvatar
-                    color="primary"
-                    variant="tonal"
-                  >
-                    <VImg :src="avatar1"/>
+                  <VAvatar color="primary"
+                           variant="tonal">
+                    <VImg v-if="authUser.profile.avatar" :src="authUser.profile.avatar"/>
+                    <span
+                      v-else
+                      class="text-1xl font-weight-semibold">
+              {{ avatarText(authUser.name) }}
+            </span>
                   </VAvatar>
                 </VBadge>
               </VListItemAction>
@@ -82,9 +89,9 @@
   </VBadge>
 </template>
 <script setup>
-import avatar1 from '@images/avatars/avatar-1.png'
 import {useAuthStore} from "@/stores/auth"
 import {useRouter} from 'vue-router';
+import {avatarText} from '@core/utils/formatters'
 
 const router = useRouter();
 const auth = useAuthStore()

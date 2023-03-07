@@ -8,7 +8,15 @@
         >
           <VListItem>
             <template #prepend>
-              <VAvatar :image="avatar"/>
+              <VAvatar color="primary"
+                       variant="tonal">
+                <VImg v-if="user.profile.avatar" :src="user.profile.avatar"/>
+                <span
+                  v-else
+                  class="text-1xl font-weight-semibold">
+              {{ avatarText(user.name) }}
+               </span>
+              </VAvatar>
             </template>
             <VListItemTitle>
               {{ user.name }}
@@ -53,7 +61,7 @@
 
 import axios from "@axios";
 import {onBeforeMount, reactive, ref} from "vue";
-import avatar from '@images/avatars/avatar-1.png'
+import {avatarText} from "@core/utils/formatters";
 export default {
   setup() {
     const friendRequests = ref([])
@@ -67,17 +75,17 @@ export default {
         paginator.pageCount = data.last_page
       })
     const acceptFriend = user =>
-      axios.get(`friend/request/${user}/accept`).then(() =>
+      axios.post(`friend/request/${user}/accept`).then(() =>
         requestList(paginator.currentPage)
       )
     const declineFriend = id =>
-      axios.get(`friend/request/${id}/decline`).then(() =>
+      axios.delete(`friend/request/${id}/decline`).then(() =>
         requestList(paginator.currentPage)
       )
     onBeforeMount(() => {
       requestList()
     })
-    return {requestList, declineFriend, acceptFriend, friendRequests, paginator,avatar}
+    return {requestList, declineFriend, acceptFriend, friendRequests, paginator,avatarText}
   },
 }
 </script>

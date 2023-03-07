@@ -11,7 +11,26 @@
         >
           <VListItem>
             <template #prepend>
-              <VAvatar :image="avatar"/>
+<!--              <VBadge-->
+<!--                location="bottom right"-->
+<!--                offset-x="3"-->
+<!--                offset-y="3"-->
+<!--                color="error"-->
+<!--              >-->
+<!--              </VBadge>-->
+
+              <VAvatar color="primary"
+                       variant="tonal">
+                <VImg v-if="user.profile.avatar" :src="user.profile.avatar"/>
+                <span
+                  v-else
+                  class="text-1xl font-weight-semibold">
+              {{ avatarText(user.name) }}
+               </span>
+              </VAvatar>
+
+
+
             </template>
             <VListItemTitle>
               {{ user.name }}
@@ -21,14 +40,14 @@
             </VListItemSubtitle>
             <template #append>
               <div class="col align-self-center d-flex justify-content-end">
-                <VBtn size="small" v-if="!user.status"  @click="addFriend(user.id)">
+                <VBtn size="small" v-if="!user.status" @click="addFriend(user.id)">
                   {{ $t("Add friend") }}
                 </VBtn>
                 <VBtn size="small" v-if="user.status === 'pending'"
-                        @click="removeRequest(user.id)"> {{ $t("Cansel request") }}
+                      @click="removeRequest(user.id)"> {{ $t("Cansel request") }}
                 </VBtn>
                 <VBtn size="small" v-if="user.status === 'friend'"
-                        @click="removeFriend(user.id)"> {{ $t("Remove friend") }}
+                      @click="removeFriend(user.id)"> {{ $t("Remove friend") }}
                 </VBtn>
               </div>
             </template>
@@ -49,10 +68,10 @@
 </template>
 
 <script>
-import avatar from '@images/avatars/avatar-1.png'
 import axios from "@axios"
 import {onBeforeMount, ref, reactive} from "vue"
 import {getRandomAvatar} from "@/plugins/helpers";
+import {avatarText} from "@core/utils/formatters";
 
 export default {
   name: "Peoples",
@@ -64,17 +83,17 @@ export default {
     })
 
     const addFriend = id =>
-      axios.get(`friend/${id}/add`).then(responce  => {
+      axios.post(`friend/${id}/add`).then(responce => {
         usersList(paginator.currentPage)
 
       })
 
     const removeRequest = user =>
-      axios.get(`friend/pending/${user}/cansel`).then(() =>
+      axios.delete(`friend/pending/${user}/cansel`).then(() =>
         usersList(paginator.currentPage),
       )
     const removeFriend = user =>
-      axios.get(`friend/${user}/delete`).then(() => {
+      axios.delete(`friend/${user}/delete`).then(() => {
         usersList(paginator.currentPage)
       })
 
@@ -88,7 +107,7 @@ export default {
       usersList()
     })
 
-    return {users,getRandomAvatar,addFriend,usersList,paginator,removeRequest,removeFriend,avatar }
+    return {users, getRandomAvatar, addFriend, usersList, paginator, removeRequest, removeFriend, avatarText}
   },
 }
 </script>

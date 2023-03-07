@@ -1,1 +1,8 @@
 // Write your overrides
+.v-card{
+  padding: 20px !important;
+}
+
+.v-img__img--contain {
+  object-fit: cover !important;
+}

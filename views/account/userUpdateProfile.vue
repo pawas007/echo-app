@@ -1,6 +1,6 @@
 <template>
   <VDialog
-    v-model="props.isDialogOpen"
+    v-model="props.isProfileDialogOpen"
     max-width="600"
     :persistent=true
     v-if="Object.keys( userDataToUpdate ).length">
@@ -66,15 +66,11 @@
 <script setup>
 import axios from "@axios";
 import {useAuthStore} from "@/stores/auth";
-const emit = defineEmits(['close-dialog'])
+const emit = defineEmits(['close-profile-dialog'])
 const props = defineProps({
-  isDialogOpen: {
+  isProfileDialogOpen: {
     type: Boolean,
     required: true,
-  },
-  userData: {
-    type: Object,
-    require: true
   },
 })
 
@@ -89,7 +85,7 @@ const userDataToUpdate = ref(JSON.parse(JSON.stringify(authUser.value)))
 
 const closeDialog = () => {
   userDataToUpdate.value = JSON.parse(JSON.stringify(authUser.value))
-  emit('close-dialog')
+  emit('close-profile-dialog')
 }
 const update = () => {
   axios.put('user/profile', userDataToUpdate.value).then(r => {
@@ -98,7 +94,7 @@ const update = () => {
     showSuccess.value = true
     setTimeout(() => {
       showSuccess.value = false
-      emit('close-dialog')
+      emit('close-profile-dialog')
     }, 1500)
 
   }).catch((e) => {
