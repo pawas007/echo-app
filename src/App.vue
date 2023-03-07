@@ -3,6 +3,7 @@ import {useTheme} from 'vuetify'
 import {useThemeConfig} from '@core/composable/useThemeConfig'
 import {hexToRgb} from '@layouts/utils'
 import {useRouter} from 'vue-router';
+
 const router = useRouter()
 import {useAuthStore} from "@/stores/auth"
 
@@ -33,12 +34,11 @@ syncConfigThemeWithVuetifyTheme()
 </template>
 
 
-
 <!--TODO CHANGE AVATAR-->
 <!--TODO USER NOTIFICATION SETTINGS-->
 <!--TODO CHANGE ROUTE METHODS-->
 <!--TODO USER ONLINE-->
 <!--TODO ADD MAIL NOTIFICATIONS-->
 <!--TODO Router before each-->
-<!--sms vrify-->
-<!--email verify-->
+<!--TODO sms verify-->
+<!--TODO email verify-->
