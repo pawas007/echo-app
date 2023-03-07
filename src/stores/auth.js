@@ -4,7 +4,7 @@ import axios from "@axios"
 
 
 export const useAuthStore = defineStore('auth', () => {
-    const user = ref({})
+    const user = ref(null)
     const isAuth = ref(false)
     const authUser = computed(() => user.value)
 
@@ -26,8 +26,8 @@ export const useAuthStore = defineStore('auth', () => {
         })
     }
 
-    async function getAuthUser() {
-        return  await axios.get('/user/auth').then(response => user.value = response.data).catch(()=>{
+     function getAuthUser() {
+        return  axios.get('/user/auth').then(response => user.value = response.data).catch(()=>{
             localStorage.removeItem('token')
             isAuth.value = false
         })

@@ -6,7 +6,7 @@
       md="5"
       lg="4"
     >
-      <user-bio-panel :userData="authUser"/>
+      <user-bio-panel v-if="authUser"  :userData="authUser"/>
     </VCol>
 
     <VCol
@@ -37,11 +37,11 @@
         :touch="false"
       >
         <VWindowItem>
-          <user-tab-notifications :userData="authUser"/>
+          <user-tab-notifications />
         </VWindowItem>
         <VWindowItem>
-          <user-chage-email :userData="authUser"/>
-          <user-chage-password :userData="authUser"/>
+          <user-update-email :userData="authUser"/>
+          <user-update-password :userData="authUser"/>
         </VWindowItem>
       </VWindow>
     </VCol>
@@ -53,8 +53,9 @@
 import UserBioPanel from "../../../views/account/userBioPanel.vue";
 import {useAuthStore} from "@/stores/auth";
 import UserTabNotifications from "../../../views/account/userTabNotifications.vue";
-import UserChagePassword from "../../../views/account/userChagePassword.vue";
-import UserChageEmail from "../../../views/account/userChageEmail.vue";
+import UserUpdatePassword  from "../../../views/account/userUpdatePassword.vue";
+import UserUpdateEmail from "../../../views/account/userUpdateEmail.vue";
+
 
 const auth = useAuthStore()
 const authUser = computed(() => auth.authUser)

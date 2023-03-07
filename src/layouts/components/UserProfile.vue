@@ -1,19 +1,3 @@
-<script setup>
-import avatar1 from '@images/avatars/avatar-1.png'
-import {useAuthStore} from "@/stores/auth"
-import {useRouter} from 'vue-router';
-
-const router = useRouter();
-const auth = useAuthStore()
-const authUser = computed(() => auth.authUser)
-
-const logout = () => {
-  auth.logout().then(() => router.push({name: 'login'}))
-
-}
-
-</script>
-
 <template>
 
   <VBadge
@@ -97,3 +81,18 @@ const logout = () => {
     </VAvatar>
   </VBadge>
 </template>
+<script setup>
+import avatar1 from '@images/avatars/avatar-1.png'
+import {useAuthStore} from "@/stores/auth"
+import {useRouter} from 'vue-router';
+
+const router = useRouter();
+const auth = useAuthStore()
+const authUser = computed(() => auth.authUser)
+
+const logout = () => {
+  auth.logout().then(() => router.push({name: 'login'}))
+
+}
+
+</script>

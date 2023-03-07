@@ -34,15 +34,11 @@ syncConfigThemeWithVuetifyTheme()
 
 
 
-
-<!--TODO USER PASSWORD-->
-
-
 <!--TODO CHANGE AVATAR-->
-<!--TODO USER DATA-->
-<!--TODO USER ONLINE-->
 <!--TODO USER NOTIFICATION SETTINGS-->
-<!--//TODO CHANGE ROUTE METHODS-->
-<!--//TODO ADD MAIL NOTIFICATIONS-->
-<!--//TODO ADD queue to notifications email-->
+<!--TODO CHANGE ROUTE METHODS-->
+<!--TODO USER ONLINE-->
+<!--TODO ADD MAIL NOTIFICATIONS-->
 <!--TODO Router before each-->
+<!--sms vrify-->
+<!--email verify-->
