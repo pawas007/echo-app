@@ -34,9 +34,8 @@ syncConfigThemeWithVuetifyTheme()
 </template>
 
 
-<!--TODO email verify-->
-<!--TODO sms verify-->
 
+<!--TODO sms verify-->
 <!--TODO USER NOTIFICATION SETTINGS with queue email-->
 <!--TODO USER ONLINE-->
 <!--TODO Fix friendship -->
