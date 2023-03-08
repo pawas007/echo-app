@@ -37,8 +37,14 @@
           <h5 class="text-h5 font-weight-semibold mb-1">
             Verify your email ✉️
           </h5>
-          <div v-if="message" class="d-flex align-center justify-center">
-            <span class="me-1">{{message}}</span>
+          <div v-if="message" class="d-flex align-center justify-center flex-column">
+            <div><span class="me-1">{{ message }}</span></div>
+           <VBtn
+              block
+              to="/"
+              class="mb-6 mt-2">
+              go home
+            </VBtn>
           </div>
           <VBtn
             v-if="!form.token && !form.email"
@@ -81,7 +87,7 @@ form.value.token = route.currentRoute?.value?.query?.token || null
 
 
 const verify = () =>
-  axios.post('user/verify/email', form.value).then(r => {
+  axios.post('verify/email', form.value).then(r => {
     message.value = r.data.message
 
   }).catch(e => {
