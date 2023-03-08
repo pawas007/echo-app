@@ -34,11 +34,10 @@ syncConfigThemeWithVuetifyTheme()
 </template>
 
 
+<!--TODO email verify-->
+<!--TODO sms verify-->
 
 <!--TODO USER NOTIFICATION SETTINGS with queue email-->
 <!--TODO USER ONLINE-->
-<!--TODO sms verify-->
-<!--TODO email verify-->
-
-<!--TODO users Avatars-->
+<!--TODO Fix friendship -->
 

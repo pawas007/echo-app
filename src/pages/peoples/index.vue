@@ -28,9 +28,6 @@
               {{ avatarText(user.name) }}
                </span>
               </VAvatar>
-
-
-
             </template>
             <VListItemTitle>
               {{ user.name }}
