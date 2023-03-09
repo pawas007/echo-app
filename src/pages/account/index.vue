@@ -38,6 +38,7 @@
           </VWindowItem>
           <VWindowItem>
            <user-email-verification/>
+            <user-phone-verification/>
           </VWindowItem>
         </VWindow>
       </VCol>
@@ -52,6 +53,7 @@ import UserTabNotifications from "../../../views/account/userTabNotifications.vu
 import UserUpdatePassword from "../../../views/account/userUpdatePassword.vue";
 import UserUpdateEmail from "../../../views/account/userUpdateEmail.vue";
 import UserEmailVerification from "../../../views/account/userEmailVerification.vue";
+import UserPhoneVerification from "../../../views/account/userPhoneVerification.vue";
 
 const auth = useAuthStore()
 const authUser = computed(() => auth.authUser)
@@ -73,3 +75,7 @@ const tabs = [
 
 </script>
 
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

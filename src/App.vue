@@ -4,12 +4,17 @@ import {useThemeConfig} from '@core/composable/useThemeConfig'
 import {hexToRgb} from '@layouts/utils'
 import {useRouter} from 'vue-router';
 
-const router = useRouter()
+
 import {useAuthStore} from "@/stores/auth"
 
 const auth = useAuthStore()
-auth.getAuthUser()
-
+const router = useRouter()
+auth.getAuthUser().catch((e) => {
+    if (router.currentRoute.value?.meta?.requiresAuth && e.response.status === 401)
+      router.push({name: 'login'})
+    auth.logout();
+  }
+)
 
 const {
   syncInitialLoaderTheme,
@@ -32,7 +37,6 @@ syncConfigThemeWithVuetifyTheme()
     </VApp>
   </VLocaleProvider>
 </template>
-
 
 
 <!--TODO sms verify-->

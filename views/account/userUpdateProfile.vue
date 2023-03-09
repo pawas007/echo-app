@@ -24,16 +24,17 @@
               v-model="userDataToUpdate.profile.sex"
               :items="['Male', 'Female']"
               label="Sex"/>
-          </VCol><VCol
-          cols="12"
-          sm="6"
-        >
-          <VAutocomplete
-            v-model="userDataToUpdate.profile.country"
-            :items='["Andorra","Angola","Germany","Poland","Ukraine"]'
-            label="Country"
-          />
-        </VCol>
+          </VCol>
+          <VCol
+            cols="12"
+            sm="6"
+          >
+            <VAutocomplete
+              v-model="userDataToUpdate.profile.country"
+              :items='["Andorra","Angola","Germany","Poland","Ukraine"]'
+              label="Country"
+            />
+          </VCol>
           <VCol
             cols="12"
             sm="6">
@@ -41,6 +42,17 @@
               v-model="userDataToUpdate.profile.age"
               :items="['0-17', '18-29', '30-54', '54+']"
               label="Age"
+            />
+          </VCol>
+          <VCol
+            cols="12"
+            sm="6">
+            <VTextField
+              type="number"
+              v-model="userDataToUpdate.phone"
+              label="Phone +"
+              :error=!!errors.phone
+              :messages=errors.phone
             />
           </VCol>
           <VCol
@@ -66,6 +78,7 @@
 <script setup>
 import axios from "@axios";
 import {useAuthStore} from "@/stores/auth";
+
 const emit = defineEmits(['close-profile-dialog'])
 const props = defineProps({
   isProfileDialogOpen: {
@@ -75,9 +88,7 @@ const props = defineProps({
 })
 
 const showSuccess = ref(false)
-const errors = ref({
-  name: ''
-})
+const errors = ref({})
 
 const auth = useAuthStore()
 const authUser = computed(() => auth.authUser)
@@ -91,6 +102,7 @@ const update = () => {
   axios.put('user/profile', userDataToUpdate.value).then(r => {
     auth.user = r.data
     errors.value.name = ''
+    errors.value.phone = ''
     showSuccess.value = true
     setTimeout(() => {
       showSuccess.value = false
@@ -98,7 +110,8 @@ const update = () => {
     }, 1500)
 
   }).catch((e) => {
-    errors.value.name = e.response.data.message
+    errors.value = e.response.data.errors
+
   })
 }
 </script>

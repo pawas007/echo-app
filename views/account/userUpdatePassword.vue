@@ -97,9 +97,7 @@ const onSubmit = () => {
           showSuccess.value = false
         }, 2000)
       }).catch((errors) => {
-        errorsPassword.value.current_password = errors.response.data.errors?.current_password
-        errorsPassword.value.new_password = errors.response.data.errors?.new_password
-        errorsPassword.value.new_confirm_password = errors.response.data.errors?.new_confirm_password
+        errorsPassword.value = errors.response.data.errors
       })
     }
   })

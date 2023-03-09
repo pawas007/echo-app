@@ -175,9 +175,7 @@ const register = () => {
   }).then(r => {
     router.push({name: 'login'})
   }).catch(e => {
-    errors.value.email = e.response.data.errors?.email[0]
-    errors.value.password = e.response.data.errors?.password[0]
-    errors.value.password_confirmation = e.response.data.errors?.password_confirmation[0]
+    errors.value = e.response.data.errors
   })
 }
 
