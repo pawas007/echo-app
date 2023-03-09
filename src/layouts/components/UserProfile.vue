@@ -98,7 +98,7 @@ const auth = useAuthStore()
 const authUser = computed(() => auth.authUser)
 
 const logout = () => {
-  auth.logout().then(() => router.push({name: 'login'}))
+  auth.logout()
 
 }
 
