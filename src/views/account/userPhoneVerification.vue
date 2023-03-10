@@ -13,8 +13,8 @@
         <span class="text-error" v-if="error && !sendMessage">{{ error }}</span>
         <span class="text-success" v-if="sendMessage">{{ sendMessage }}</span>
         <span class="text-success" v-if="authUser.phone_verified_at">Verified</span>
-        <VBtn v-if="!sendMessage && !authUser.phone_verified_at" @click="sendVerifyPhone" class="mt-2">Verify</VBtn>
       </div>
+      <VBtn v-if="!sendMessage && !authUser.phone_verified_at" @click="sendVerifyPhone" class="mt-2">Verify</VBtn>
       <div class="mt-4" v-if="showCodeField">
         <VTextField
           v-model="code"
@@ -23,7 +23,6 @@
         <div><span class="text-error" v-if="errorVerifyCode">{{ errorVerifyCode }}</span></div>
         <VBtn @click="verifyPhone" class="mt-2">Send</VBtn>
       </div>
-
     </VCol>
   </VCard>
 </template>
