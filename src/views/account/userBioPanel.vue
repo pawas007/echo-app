@@ -48,7 +48,6 @@
                 </h6>
               </VListItemTitle>
             </VListItem>
-
             <VListItem>
               <VListItemTitle>
                 <h6 class="text-base font-weight-semibold">
@@ -58,14 +57,14 @@
               </VListItemTitle>
             </VListItem>
             <VListItem>
-              <VListItemTitle>
+              <VListItemTitle v-if=" auth.user.profile.sex">
                 <h6 class="text-base font-weight-semibold">
                   Sex:
                   <span class="text-body-2">{{ auth.user.profile.sex }}</span>
                 </h6>
               </VListItemTitle>
             </VListItem>
-            <VListItem>
+            <VListItem v-if=" auth.user.profile.country">
               <VListItemTitle>
                 <h6 class="text-base font-weight-semibold">
                   Country:
@@ -73,7 +72,7 @@
                 </h6>
               </VListItemTitle>
             </VListItem>
-            <VListItem>
+            <VListItem v-if="auth.user.profile.age">
               <VListItemTitle>
                 <h6 class="text-base font-weight-semibold">
                   Age:

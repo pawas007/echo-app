@@ -30,7 +30,7 @@
           class="mt-6 disable-tab-transition"
           :touch="false">
           <VWindowItem>
-            <user-tab-notifications/>
+            <user-settings/>
           </VWindowItem>
           <VWindowItem>
             <user-update-email :userData="authUser"/>
@@ -47,13 +47,13 @@
 </template>
 
 <script setup>
-import UserBioPanel from "../../../views/account/userBioPanel.vue";
+import UserBioPanel from "../../views/account/userBioPanel.vue";
 import {useAuthStore} from "@/stores/auth";
-import UserTabNotifications from "../../../views/account/userTabNotifications.vue";
-import UserUpdatePassword from "../../../views/account/userUpdatePassword.vue";
-import UserUpdateEmail from "../../../views/account/userUpdateEmail.vue";
-import UserEmailVerification from "../../../views/account/userEmailVerification.vue";
-import UserPhoneVerification from "../../../views/account/userPhoneVerification.vue";
+import UserSettings from "../../views/account/userSettings.vue";
+import UserUpdatePassword from "../../views/account/userUpdatePassword.vue";
+import UserUpdateEmail from "../../views/account/userUpdateEmail.vue";
+import UserEmailVerification from "../../views/account/userEmailVerification.vue";
+import UserPhoneVerification from "../../views/account/userPhoneVerification.vue";
 
 const auth = useAuthStore()
 const authUser = computed(() => auth.authUser)
@@ -61,7 +61,7 @@ const userTab = ref(null)
 const tabs = [
   {
     icon: 'tabler-bell',
-    title: 'Notifications',
+    title: 'Settings',
   },
   {
     icon: 'tabler-lock',

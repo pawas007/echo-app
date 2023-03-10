@@ -39,20 +39,14 @@
           </h5>
           <div v-if="message" class="d-flex align-center justify-center flex-column">
             <div><span class="me-1">{{ message }}</span></div>
-           <VBtn
-              block
-              to="/"
-              class="mb-6 mt-2">
-              go home
-            </VBtn>
+            <a
+              class="v-btn v-btn--block v-btn--elevated v-theme--dark bg-primary v-btn--density-default v-btn--size-default v-btn--variant-elevated mb-6 mt-2"
+              href="/">Go home</a>
           </div>
-          <VBtn
+          <a
             v-if="!form.token && !form.email"
-            block
-            to="/"
-            class="mb-6 mt-2">
-            Skip for now
-          </VBtn>
+            class="v-btn v-btn--block v-btn--elevated v-theme--dark bg-primary v-btn--density-default v-btn--size-default v-btn--variant-elevated mb-6 mt-2"
+            href="/">Skip for now</a>
         </VCardText>
       </VCard>
     </VCol>
@@ -71,6 +65,7 @@ import authV2MaskLight from '@images/pages/misc-mask-light.png'
 import {useGenerateImageVariant} from '@core/composable/useGenerateImageVariant'
 import {useRouter} from "vue-router";
 import axios from "@axios";
+import {useAuthStore} from "@/stores/auth";
 
 const authThemeImg = useGenerateImageVariant(authV2ForgotPasswordIllustrationLight, authV2ForgotPasswordIllustrationDark)
 const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
@@ -89,7 +84,6 @@ form.value.token = route.currentRoute?.value?.query?.token || null
 const verify = () =>
   axios.post('verify/email', form.value).then(r => {
     message.value = r.data.message
-
   }).catch(e => {
     message.value = e.response.data.message
   })

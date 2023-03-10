@@ -25,9 +25,9 @@
 </template>
 <script setup>
 import axios from "@axios";
-import PendingRequests from "../../../views/friends/pendingRequests.vue";
-import FriendRequests from "../../../views/friends/friendRequests.vue";
-import MyFriends from "../../../views/friends/myFriends.vue";
+import PendingRequests from "../../views/friends/pendingRequests.vue";
+import FriendRequests from "../../views/friends/friendRequests.vue";
+import MyFriends from "../../views/friends/myFriends.vue";
 
 const currentTab = ref(0)
 const activeTab = ref("MyFriends")
