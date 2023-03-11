@@ -39,6 +39,3 @@ syncConfigThemeWithVuetifyTheme()
 </template>
 
 
-<!--TODO USER ONLINE-->
-
-
