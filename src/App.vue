@@ -40,5 +40,5 @@ syncConfigThemeWithVuetifyTheme()
 
 
 <!--TODO USER ONLINE-->
-<!--TODO Fix friendship -->
+
 
