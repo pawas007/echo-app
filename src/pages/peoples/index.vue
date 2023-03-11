@@ -43,7 +43,7 @@
                 <VBtn size="small" v-if="user.status === 'pending'"
                       @click="removeRequest(user.id)"> {{ $t("Cansel request") }}
                 </VBtn>
-                <VBtn size="small" v-if="user.status === 'friend'"
+                <VBtn size="small" v-if="user.status === 'accepted'"
                       @click="removeFriend(user.id)"> {{ $t("Remove friend") }}
                 </VBtn>
               </div>
