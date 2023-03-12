@@ -27,8 +27,8 @@ export const useAuthStore = defineStore('auth', () => {
         })
     }
 
-     function getAuthUser() {
-        return  axios.get('/user/auth').then(response => user.value = response.data).catch(()=>{
+    function getAuthUser() {
+        return axios.get('/user/auth').then(response => user.value = response.data).catch(() => {
             localStorage.removeItem('token')
             isAuth.value = false
         })

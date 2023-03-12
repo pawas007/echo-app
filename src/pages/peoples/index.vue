@@ -11,23 +11,7 @@
         >
           <VListItem>
             <template #prepend>
-<!--              <VBadge-->
-<!--                location="bottom right"-->
-<!--                offset-x="3"-->
-<!--                offset-y="3"-->
-<!--                color="error"-->
-<!--              >-->
-<!--              </VBadge>-->
-
-              <VAvatar color="primary"
-                       variant="tonal">
-                <VImg v-if="user.profile.avatar" :src="user.profile.avatar"/>
-                <span
-                  v-else
-                  class="text-1xl font-weight-semibold">
-              {{ avatarText(user.name) }}
-               </span>
-              </VAvatar>
+              <user-list-avatar :user="user" />
             </template>
             <VListItemTitle>
               {{ user.name }}
@@ -68,10 +52,12 @@
 import axios from "@axios"
 import {onBeforeMount, ref, reactive} from "vue"
 import {getRandomAvatar} from "@/plugins/helpers";
-import {avatarText} from "@core/utils/formatters";
+import UserListAvatar from "@/views/components/userListAvatar.vue";
+
 
 export default {
   name: "Peoples",
+  components: {UserListAvatar},
   setup() {
     const users = ref([])
     const paginator = reactive({
@@ -104,11 +90,11 @@ export default {
       usersList()
     })
 
-    return {users, getRandomAvatar, addFriend, usersList, paginator, removeRequest, removeFriend, avatarText}
+    return {users, getRandomAvatar, addFriend, usersList, paginator, removeRequest, removeFriend}
   },
 }
 </script>
 <route lang="yaml">
 meta:
-  requiresAuth: true
+requiresAuth: true
 </route>

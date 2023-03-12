@@ -8,15 +8,7 @@
         >
           <VListItem>
             <template #prepend>
-              <VAvatar color="primary"
-                       variant="tonal">
-                <VImg v-if="user.profile.avatar" :src="user.profile.avatar"/>
-                <span
-                  v-else
-                  class="text-1xl font-weight-semibold">
-              {{ avatarText(user.name) }}
-               </span>
-              </VAvatar>
+              <user-list-avatar :user="user"/>
             </template>
             <VListItemTitle>
               {{ user.name }}
@@ -62,7 +54,10 @@
 import axios from "@axios";
 import {onBeforeMount, reactive, ref} from "vue";
 import {avatarText} from "@core/utils/formatters";
+import UserListAvatar from "@/views/components/userListAvatar.vue";
+
 export default {
+  components: {UserListAvatar},
   setup() {
     const friendRequests = ref([])
     const paginator = reactive({
@@ -85,7 +80,7 @@ export default {
     onBeforeMount(() => {
       requestList()
     })
-    return {requestList, declineFriend, acceptFriend, friendRequests, paginator,avatarText}
+    return {requestList, declineFriend, acceptFriend, friendRequests, paginator, avatarText}
   },
 }
 </script>
